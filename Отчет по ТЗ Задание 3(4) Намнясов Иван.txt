@@ -1,0 +1,157 @@
+﻿1. Дана JSON строка '["Коля", "Вася", "Петя"]'. Преобразуйте ее в массив
+JavaScript и выведите на экран элемент "Петя".
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        var jsonString = '["Коля", "Вася", "Петя"]';
+        var jsonArray = JSON.parse(jsonString);
+        var petia = jsonArray[2];
+        alert(petia);
+    </script>
+</head>
+<body>
+</body>
+</html>
+
+
+2. Выведите на экран (document.write) с помощью циклов JavaScript строку
+'111222333444555666777888999'
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        var result = '';
+        for (var i = 1; i <= 9; i++) {
+            for (var j = 0; j < 3; j++) {
+                result += i;
+            }
+        }
+        document.write(result);
+    </script>
+</head>
+<body>
+</body>
+</html>
+
+
+3. Напишите код JavaScript который выводит алертом содержимое поля
+ввода, возведенное в квадрат
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function squareInput() {
+            var inputValue = document.getElementById("inputField").value;
+            var squaredValue = inputValue * inputValue;
+            alert("Квадрат введенного числа: " + squaredValue);
+        }
+    </script>
+</head>
+<body>
+    <input type="text" id="inputField" />
+    <button onclick="squareInput()">Возвести в квадрат</button>
+</body>
+</html>
+
+
+4. Написать функцию для кнопки (id=”buttonAdd”) которая добавляет новую
+строчку к таблице (id=”memberTable”) с пустыми полями имя и фамилия
+(тип полей input), но заполненным полем № п\п (тоже тип input ,но
+недоступен для редактирования).
+Структура таблицы:
+№ п\п Имя Фамилия
+1 Иван Иванов
+2 Петр Петров
+5. Написать функцию для кнопки валидации данных (id=”validButton”),
+которая проверяет наличие пустых полней из таблицы ( задания 4 ) и если
+поля заполнены, то проверяет кол-во введенных символов ( >= 2). При
+успешной валидации выводит на экран алерт: «Успешно». Иначе «Не
+выполнены все условия заполнения таблицы».
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Table Example</title>
+</head>
+<body>
+  <table id="memberTable">
+    <tr>
+      <th>№ п\п</th>
+      <th>Имя</th>
+      <th>Фамилия</th>
+    </tr>
+    <tr>
+      <td><input type="text" value="1" readonly></td>
+      <td><input type="text" value="Иван"></td>
+      <td><input type="text" value="Иванов"></td>
+    </tr>
+    <tr>
+      <td><input type="text" value="2" readonly></td>
+      <td><input type="text" value="Петр"></td>
+      <td><input type="text" value="Петров"></td>
+    </tr>
+  </table>
+  <button id="buttonAdd">Добавить</button>
+  <button id="validButton">Валидация</button>
+
+
+  <script>
+    // Функция для добавления новой строки в таблицу
+    document.getElementById('buttonAdd').addEventListener('click', function () {
+      var table = document.getElementById('memberTable');
+      var rowCount = table.rows.length;
+      var row = table.insertRow(rowCount);
+
+
+      var cell1 = row.insertCell(0);
+      var cell2 = row.insertCell(1);
+      var cell3 = row.insertCell(2);
+
+
+      cell1.innerHTML = '<input type="text" value="' + rowCount + '" readonly>';
+      cell2.innerHTML = '<input type="text" value="">';
+      cell3.innerHTML = '<input type="text" value="">';
+    });
+
+
+    // Функция для валидации данных
+    document.getElementById('validButton').addEventListener('click', function () {
+      var table = document.getElementById('memberTable');
+      var rows = table.rows;
+
+
+      for (var i = 1; i < rows.length; i++) {
+        var nameInput = rows[i].cells[1].querySelector('input');
+        var surnameInput = rows[i].cells[2].querySelector('input');
+
+
+        if (nameInput.value.trim() === '' || surnameInput.value.trim() === '') {
+          alert('Не выполнены все условия заполнения таблицы');
+          return;
+        }
+
+
+        if (nameInput.value.length < 2 || surnameInput.value.length < 2) {
+          alert('Не выполнены все условия заполнения таблицы');
+          return;
+        }
+      }
+
+
+      alert('Успешно');
+    });
+  </script>
+</body>
+</html>
